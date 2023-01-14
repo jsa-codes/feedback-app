@@ -6,7 +6,9 @@ import { FeedbackData } from './components/data/FeedbackData'
 import { FeedbackList } from './components/FeedbackList'
 import { FeedbackStats } from './components/FeedbackStats'
 import { FeedbackForm } from './components/FeedbackForm'
-import { AboutPage } from './components/pages/AboutPage'
+import { AboutPage } from './pages/AboutPage'
+import { AboutIconLink } from './components/AboutIconLink'
+import { FeedbackProvider } from './context/FeedbackContext'
 
 export const App = () => {
     // Global State variable is 'feedback' variable
@@ -22,25 +24,28 @@ export const App = () => {
             setFeedback(feedback.filter((item) => item.id !== id))
         }
     }
+
+
     return (
-        // <FeedbackProvider>
-        <Router>
-            <Header />
-            <div className="container">
-                <Routes>
-                    <Route exact path='/' element={
-                        <>
-                            <FeedbackForm />
-                            <FeedbackStats />
-                            <FeedbackList />
-                        </>
-                    }>
-                    </Route>
-                    <Route path='/about' element={<AboutPage />} />
-                </Routes>
-                {/* <AboutIconLink /> */}
-            </div>
-        </Router >
-        // </FeedbackProvider>
+        <FeedbackProvider>
+            <Router>
+                <Header />
+                <div className="container">
+                    <Routes>
+                        <Route exact path='/' element={
+                            <>
+                                <FeedbackForm handleAdd={addFeedback} />
+                                <FeedbackStats feedback={feedback} />
+                                <FeedbackList feedback={feedback}
+                                    handleDelete={deleteFeedback} />
+                            </>
+                        }>
+                        </Route>
+                        <Route path='/about' element={<AboutPage />} />
+                    </Routes>
+                    <AboutIconLink />
+                </div>
+            </Router >
+        </FeedbackProvider>
     )
 }

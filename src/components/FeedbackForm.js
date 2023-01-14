@@ -5,6 +5,7 @@ import { RatingSelect } from './RatingSelect'
 
 export const FeedbackForm = ({ handleAdd }) => {
 
+    // INITIAL STATE FOR FEEDBACK FORM
     const [text, setText] = useState('')
     const [rating, setRating] = useState(10)
     const [btnDisabled, setBtnDisabled] = useState(true)
