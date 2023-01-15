@@ -191,6 +191,7 @@ input:focus {
  * document */
 .about-link {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
 }
 
